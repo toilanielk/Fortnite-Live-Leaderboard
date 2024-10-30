@@ -1,12 +1,13 @@
 # Fortnite Leaderboard Dashboard
 
-This project provides a real-time leaderboard for Fortnite eliminations by reading from the game’s log file. It displays players' scores, statuses (alive, killed by a specific player, or rebooted), and updates every 2 seconds on a modern, Apple-inspired HTML dashboard.
+This project provides a real-time leaderboard for Fortnite eliminations by reading from the game’s log file. It displays players' scores, statuses (alive, killed by a specific player, or rebooted), and updates every 2 seconds on a modern HTML dashboard.
 
+![alt text](image.png)
 ## Features
 
 - **Real-time Updates**: Reads the Fortnite log file to capture eliminations, reboots, and new game starts in real time.
 - **Leaderboard Display**: Shows each player's score, status, and the player who eliminated them if applicable.
-- **Modern Dashboard**: Clean, Apple-inspired design with a scrollable, responsive leaderboard table.
+- **Modern Dashboard**: Clean and modern design with a scrollable, responsive leaderboard table.
 - **Network Accessibility**: Can be accessed on the local network by setting the server to run on `0.0.0.0`.
 
 ## Technologies
@@ -19,17 +20,20 @@ This project provides a real-time leaderboard for Fortnite eliminations by readi
 
 ### Prerequisites
 
+
 - Python 3.6+
 - Fortnite (to generate logs)
 - Flask
 
 Install Flask if you haven’t already:
 
-```bash
+```sh
 pip install flask
 ```
 
 ### Setup
+
+You can skip steps 1 to 3 and the prerequisites if you believe in my compiled executable for running the server ('server.exe').
 
 1. Clone the repository or download the code files.
 
@@ -38,7 +42,7 @@ pip install flask
 log_file_path = os.path.join(os.path.expanduser("~"), "AppData", "Local", "FortniteGame", "Saved", "Logs", "FortniteGame.log")
 ```
 3. Run the server:
-```bash
+```sh
 python server.py
 ```
 4. Access the Dashboard:
@@ -49,6 +53,7 @@ python server.py
 ```graphql
 fortnite-leaderboard/
 ├── server.py          # Main Python file for log parsing and server
+├── server.exe         # Compiled executable for running the server
 ├── templates/
 │   └── index.html     # HTML for the dashboard
 └── README.md          # Project documentation
@@ -66,10 +71,4 @@ fortnite-leaderboard/
 
 ## License
 This project is open source and available under the MIT License.
-
-```vbnet
-This README provides a clear overview of the project, setup instructions, usage, and troubleshooting tips. Let me know if you'd like further customization!
-```
-
-
 
