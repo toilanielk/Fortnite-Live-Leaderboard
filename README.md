@@ -66,8 +66,10 @@ fortnite-leaderboard/
     - "Killed by [Killer]" for players eliminated by another
     - Reset leaderboard when a new game starts
 ## Troubleshooting
-- Log file not found: Ensure Fortnite is running and logs are being generated at the default path.
-- Accessing on local network: Ensure the server is running on 0.0.0.0, and your firewall allows connections on port 5000.
+- **Leaderboard not updating**: If the leaderboard stops updating, check that the log file is not open in any text editor. Some editors may lock the file, preventing the program from reading new log entries.
+- **Log file not found**: Ensure Fortnite is running and logs are being generated at the default path.
+- **Accessing on local network**: Ensure the server is running on `0.0.0.0`, and your firewall allows connections on port `5000`.
+
 
 ## License
 This project is open source and available under the MIT License.
