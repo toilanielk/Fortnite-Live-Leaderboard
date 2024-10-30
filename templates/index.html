@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fortnite Leaderboard</title>
+    <style>
+        /* Apple-inspired minimalist design */
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #f5f5f7;
+            height: 100vh;
+            margin: 0;
+            overflow: hidden; /* Prevent body scroll */
+        }
+
+        .container {
+            background-color: white;
+            width: 90%;
+            max-width: 600px;
+            padding: 20px;
+            border-radius: 16px;
+            box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            max-height: 80vh; /* Limit container height to 80% of viewport */
+            overflow-y: auto; /* Enable vertical scrolling */
+        }
+
+        h1 {
+            font-size: 24px;
+            color: #333;
+            margin-bottom: 16px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        th, td {
+            padding: 12px;
+            font-size: 16px;
+        }
+
+        th {
+            background-color: #f0f0f5;
+            color: #555;
+            font-weight: 600;
+            text-align: left;
+        }
+
+        td {
+            background-color: #ffffff;
+            color: #333;
+            text-align: left;
+        }
+
+        tr:nth-child(even) td {
+            background-color: #f9f9fb;
+        }
+
+        tr:hover td {
+            background-color: #eaeaea;
+        }
+
+        /* Status Badge */
+        .badge {
+            display: inline-block;
+            padding: 4px 8px;
+            border-radius: 8px;
+            font-size: 14px;
+            color: white;
+            font-weight: bold;
+        }
+
+        .alive {
+            background-color: #4caf50;
+        }
+
+        .dead {
+            background-color: #d9534f;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Fortnite Leaderboard</h1>
+        <table id="leaderboard">
+            <thead>
+                <tr>
+                    <th>Player</th>
+                    <th>Score</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Leaderboard entries will be populated here by JavaScript -->
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        async function fetchLeaderboard() {
+            try {
+                const response = await fetch('/leaderboard');
+                const data = await response.json();
+                updateLeaderboard(data);
+            } catch (error) {
+                console.error('Error fetching leaderboard:', error);
+            }
+        }
+
+        function updateLeaderboard(data) {
+            const tbody = document.getElementById('leaderboard').getElementsByTagName('tbody')[0];
+            tbody.innerHTML = ''; // Clear existing rows
+
+            for (const [player, info] of data) {
+                const row = tbody.insertRow();
+                row.insertCell(0).innerText = player;
+                row.insertCell(1).innerText = info.score;
+                
+                // Create status badge
+                const statusCell = row.insertCell(2);
+                const badge = document.createElement("span");
+                badge.classList.add("badge", info.status === "alive" ? "alive" : "dead");
+                badge.innerText = info.status.charAt(0).toUpperCase() + info.status.slice(1);
+                statusCell.appendChild(badge);
+            }
+        }
+
+        // Fetch the leaderboard every 2 seconds
+        setInterval(fetchLeaderboard, 2000);
+        // Initial load
+        fetchLeaderboard();
+    </script>
+</body>
+</html>
